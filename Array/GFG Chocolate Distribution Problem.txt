@@ -1,0 +1,22 @@
+GFG - Chocolate Distribution Problem
+
+class Solution{
+    public:
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+    //code
+    sort(a.begin(),a.end());
+    long long dif=INT_MAX;
+    int i=0;
+    int j=i+m-1;
+    while(j<n)
+    {
+        if(a[j]-a[i]<dif)
+        {
+            dif=a[j]-a[i];
+        }
+        i++;
+        j++;
+    }
+    return dif;
+    }   
+};

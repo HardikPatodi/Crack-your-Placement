@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void find(vector<string>&ans,int open,int close,string temp,int n)
+    {
+        if(open >=n && close >=n)
+        {
+            ans.push_back(temp);
+            return;
+        }
+        if(open<n)
+        {
+            temp=temp+"(";
+            find(ans,open+1,close,temp,n);
+            temp.erase(temp.length()-1,1);
+        }
+        if(close<open)
+        {
+            temp=temp+")";
+            find(ans,open,close+1,temp,n);
+            temp.erase(temp.length()-1,1);
+        }
+
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string>ans;
+        int open=0;
+        int close=0;
+        string temp="";
+        find(ans,open,close,temp,n);
+        return ans;
+    }
+};
