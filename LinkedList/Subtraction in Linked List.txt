@@ -1,0 +1,104 @@
+class Solution {
+private:
+  int length(Node *head) {
+    Node *cur = head;
+    int size = 0;
+    while (cur) {
+      size += 1;
+      cur = cur->next;
+    }
+    return size;
+  }
+
+  Node *reverse(Node *head) {
+    Node *current = head;
+    Node *prev = nullptr;
+    while (current) {
+      Node *nextNode = current->next;
+      current->next = prev;
+      prev = current;
+      current = nextNode;
+    }
+    return prev;
+  }
+
+public:
+  Node *subLinkedList(Node *head1, Node *head2) {
+    while (head1 && head1->data == 0) {
+      head1 = head1->next;
+    }
+    while (head2 && head2->data == 0) {
+      head2 = head2->next;
+    }
+
+    if (!head1 && !head2) {
+      return new Node(0);
+    }
+
+    int n1 = length(head1);
+    int n2 = length(head2);
+
+    if (n2 > n1) {
+      return subLinkedList(head2, head1);
+    }
+
+    if (n1 == n2) {
+      Node *temp1 = head1;
+      Node *temp2 = head2;
+
+      while (temp1->data == temp2->data) {
+        temp1 = temp1->next;
+        temp2 = temp2->next;
+
+        if (!temp1) {
+          return new Node(0);
+        }
+      }
+
+      if (temp2->data > temp1->data) {
+        return subLinkedList(head2, head1);
+      }
+    }
+
+    Node *h1 = reverse(head1);
+    Node *h2 = reverse(head2);
+
+    Node *result = nullptr;
+    Node *current = nullptr;
+    int borrow = 0;
+
+    while (h1 || h2 || borrow) {
+      int c1 = h1 ? h1->data : 0;
+      int c2 = h2 ? h2->data : 0;
+
+      c1 -= borrow;
+
+      if (c1 < c2) {
+        c1 += 10;
+        borrow = 1;
+      } else {
+        borrow = 0;
+      }
+
+      int diff = c1 - c2;
+
+      Node *newNode = new Node(diff);
+      if (!result) {
+        result = newNode;
+        current = result;
+      } else {
+        current->next = newNode;
+        current = newNode;
+      }
+
+      if (h1) h1 = h1->next;
+      if (h2) h2 = h2->next;
+    }
+
+    Node *res = reverse(result);
+    while (res && res->data == 0) {
+      res = res->next;
+    }
+    return res;
+  }
+};

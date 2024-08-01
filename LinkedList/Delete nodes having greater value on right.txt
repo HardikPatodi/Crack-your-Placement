@@ -1,0 +1,41 @@
+class Solution
+{
+    public:
+    Node*reverse(Node*root)
+    {
+        if(root==NULL)return NULL;
+        Node*prev=NULL;
+        Node*curr=root;
+        Node*next=NULL;
+        while(curr!=NULL)
+        {
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    Node *compute(Node *head)
+    {
+        head=reverse(head);
+        int min=head->data;
+        Node*curr=head->next;
+        Node*prev=head;
+        while(curr!=NULL)
+        {
+            if(curr->data>=min)
+            {
+                prev=curr;
+                min=curr->data;
+            }
+            else
+            {
+                prev->next=curr->next;
+            }
+            curr=curr->next;
+        }
+        return reverse(head);
+    }
+    
+};

@@ -1,0 +1,45 @@
+class Solution {
+public:
+    //  RECURSIVE SOLUTION
+    // ListNode* reverseListbyrecur(ListNode* prev,ListNode* curr)
+    // {
+    //     while(curr==NULL)
+    //     {
+    //         return prev;
+    //     }
+    //     ListNode*temp=curr->next;
+    //     curr->next=prev;
+    //     prev=curr;
+    //     curr=temp;
+    //     ListNode*recurionans = reverseListbyrecur(prev,curr);
+    //     return recurionans;
+    // }
+    ListNode* reverseList(ListNode* head) {
+        // ListNode*prev=NULL;//RECURSIVE SOLUTION
+        // ListNode*curr=head;
+        // return reverseListbyrecur(prev,curr);
+        // ListNode* prev=NULL;//NORMAL SOLUTION
+        // ListNode* curr=head;
+        // while(curr != NULL)
+        // {
+        //     ListNode*next=curr->next;
+        //     curr->next=prev;
+        //     prev=curr;
+        //     curr=next;
+        // }
+        // head=prev;
+        // return head;
+
+        ListNode*prev=NULL;
+        ListNode*curr=head;
+        while(curr!=NULL)
+        {
+            ListNode*temp=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=temp;
+        }
+        // head=prev;
+        return prev;
+    }
+};

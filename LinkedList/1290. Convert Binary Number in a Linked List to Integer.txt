@@ -1,0 +1,16 @@
+class Solution {
+public:
+    void intobinary(ListNode*&head ,int&p,int&ans)
+    {
+        if(head==NULL)return;
+        intobinary(head->next,p,ans);
+        ans=head->val*p+ans;
+        p=p*2;
+    }
+    int getDecimalValue(ListNode* head) {
+        int p=1;
+        int ans=0;
+        intobinary(head,p,ans);
+        return ans;
+    }
+};

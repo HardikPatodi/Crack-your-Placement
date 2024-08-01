@@ -1,0 +1,51 @@
+approach -1
+
+class Solution {
+public:
+    bool hasCycle(ListNode *head) 
+    {
+    ListNode*slow=head;
+    ListNode*fast=head;
+    while(fast!=NULL && fast->next!=NULL)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+        if(fast==slow)return 1;
+    }
+    return 0;
+    }
+};
+
+approach -2
+
+class Solution {
+public:
+    bool hasCycle(ListNode *head) 
+    {
+        map<ListNode*,bool>table;
+        ListNode*curr=head;
+        while(curr!=NULL)
+        {
+            if(table[curr]==false)
+            {
+                table[curr]=true;
+            }
+            else 
+            return true;
+            curr=curr->next;
+        }
+        return false;
+    ListNode*slow=head;
+    ListNode*fast=head;
+    while(fast!=NULL &&fast->next!=NULL)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+        if(fast==slow)
+        {
+            return true;
+        }
+    }
+    return false;
+       }
+};

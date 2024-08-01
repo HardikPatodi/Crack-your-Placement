@@ -1,0 +1,15 @@
+class Solution{
+public:	
+	void reverseSubArray(int *arr, int n, int l, int r) {
+	    // code here
+	    int a=l-1;
+	    int b=r-1;
+	    while(a<=b)
+	    {
+	        swap(arr[a],arr[b]);
+	        a++;b--;
+	    }
+	    
+	}
+
+};

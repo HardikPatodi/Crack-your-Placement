@@ -1,0 +1,10 @@
+class Solution {
+  public:
+    long long int minOperations(int N) {
+        if(N%2==0)return (long)((long)(N/2)*(long)(N/2));
+        else
+        {
+            return (long)((long)(N/2)*((long)(N/2)+1));
+        }
+    }
+};

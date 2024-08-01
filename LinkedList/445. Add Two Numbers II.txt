@@ -1,0 +1,46 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        stack<ListNode*>st1,st2;
+        stack<int>st;
+        while(l1!=NULL)
+        {
+            st1.push(l1);
+            l1=l1->next;
+        }
+        while(l2!=NULL)
+        {
+            st2.push(l2);
+            l2=l2->next;
+        }
+        int carry=0;
+        ListNode*dummy=new ListNode(-1);
+        ListNode*copy=dummy;
+        while( !st1.empty() || !st2.empty() || carry)
+        {
+            int sum=0;
+            if(!st1.empty())
+            {
+                sum=sum+st1.top()->val;
+                st1.pop();
+            }
+            if(!st2.empty())
+            {
+                sum=sum+st2.top()->val;
+                st2.pop();
+            }
+            sum=sum+carry;
+            carry=sum/10;
+            sum=sum%10;
+            st.push(sum);
+        }
+        while(!st.empty())
+        {
+            ListNode*temp=new ListNode(st.top());
+            st.pop();
+            copy->next=temp;
+            copy=copy->next;
+        }
+        return dummy->next;
+    }
+};
