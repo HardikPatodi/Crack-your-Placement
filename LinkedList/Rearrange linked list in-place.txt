@@ -1,0 +1,55 @@
+Node* rev(Node* h){
+    Node* n=h;
+    Node* c=h;
+    Node* p=NULL;
+    
+    while(n!=NULL){
+        n=n->next;
+        c->next=p;
+        p=c;
+        c=n;
+    }
+    
+    return(p);
+    
+}
+
+
+Node *inPlace(Node *root)
+{
+    Node* f=root;
+    Node* s=root;
+    
+    while(f->next!=NULL && f->next->next!=NULL){
+        s=s->next;
+        f=f->next->next;
+    }
+    
+    
+    Node* q=s->next;
+    s->next=NULL;
+    Node* p=root;
+
+    if(p==NULL || q==NULL)
+        return(root);
+    
+    q=rev(q);
+    
+    Node* pn=p->next;
+    Node* qn=q->next;
+    
+    while(p!=NULL &&  q!=NULL){
+        p->next=q;
+        q->next=pn;
+        
+        p=pn;
+        q=qn;
+        
+        if(pn!=NULL)
+            pn=pn->next;
+        if(qn!=NULL)
+            qn=qn->next;
+    }
+    
+    return(root);
+}

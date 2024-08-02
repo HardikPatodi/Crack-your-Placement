@@ -1,0 +1,15 @@
+class Solution {
+public:
+    TreeNode*change(TreeNode*&root)
+    {
+        if(root==NULL)return NULL;
+        root->left=change(root->left);
+        root->right=change(root->right);
+        swap(root->left,root->right);
+        return root;
+    }
+    TreeNode* invertTree(TreeNode*root) {
+        
+        return change(root);
+    }
+};

@@ -1,0 +1,67 @@
+class Solution {
+public:
+    vector<int>nextSmallestElemet(vector<int> arr,int n)
+    {
+        stack<int>st;
+        st.push(-1);
+        vector<int>ans(n);
+        for(int i=n-1;i>=0;i--)
+        {
+            int curr=arr[i];
+            while(st.top()!=-1 && curr<=arr[st.top()])
+            {
+                st.pop();
+            }
+            ans[i]=st.top();
+            st.push(i);
+        }
+        return ans;
+    }
+    vector<int>prevSmallestElemet(vector<int> arr,int n)
+    {
+        stack<int>st;
+        st.push(-1);
+        vector<int>ans(n);
+        for(int i=0;i<n;i++)
+        {
+            int curr=arr[i];
+            while(st.top()!=-1 && curr<=arr[st.top()])
+            {
+                st.pop();
+            }
+            ans[i]=st.top();
+            st.push(i);
+        }
+        return ans;
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        int n=heights.size();
+
+        vector<int>next(n);
+        next=nextSmallestElemet(heights,n);
+
+        vector<int>prev(n);
+        prev=prevSmallestElemet(heights,n);
+
+        int maxarea=INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            cout<<next[i]<<" ";
+        }
+        cout<<endl;
+        for(int i=0;i<n;i++)
+        {
+            cout<<prev[i]<<" ";
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(next[i]==-1)next[i]=n;
+            int l=heights[i];
+            int b=next[i]-prev[i]-1;
+            int area=l*b;
+            maxarea=max(maxarea,area);
+
+        }
+        return maxarea;
+    }
+};

@@ -1,0 +1,54 @@
+class Solution {
+public:
+    ListNode*fmid(ListNode* head)
+    {
+        ListNode*fast=head;
+        ListNode*slow=head;
+        while(fast!=NULL&&fast->next!=NULL)
+        {
+            fast=fast->next;
+            if(fast->next!=NULL)
+            {
+                slow=slow->next;
+                fast=fast->next;
+            }
+        }
+        return slow;
+    }
+    ListNode*reverse(ListNode* head)
+    {
+        ListNode*prev=NULL;
+        ListNode*curr=head;
+        ListNode*next=NULL;
+        while(curr!=NULL)
+        {
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    void reorderList(ListNode* head) {
+        if(head==NULL&&head->next==NULL)return;
+        ListNode*mid=fmid(head);
+        ListNode*h2=mid->next;
+        mid->next=NULL;
+        h2=reverse(h2);
+        ListNode*dummy=new ListNode(-1);
+        ListNode*temp=dummy;
+        while(h2!=NULL)
+        {
+            temp->next=head;
+            head=head->next;
+            temp=temp->next;
+
+            temp->next=h2;
+            h2=h2->next;
+            temp=temp->next;
+        }
+        temp->next=head;
+        head= dummy->next;
+        
+    }
+};

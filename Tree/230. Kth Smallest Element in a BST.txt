@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int checkK(TreeNode* root, int&k)
+    {
+        if(root==NULL)return -1;
+        int lans=checkK(root->left,k);
+        if(lans!=-1)
+        return lans;
+        k--;
+        if(k==0)return root->val;
+        int rans=checkK(root->right,k);
+        return rans;
+    }
+    int kthSmallest(TreeNode* root, int&k) {
+        int n;
+        
+        return checkK(root,k);
+        
+    }
+};

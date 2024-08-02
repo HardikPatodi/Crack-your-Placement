@@ -1,0 +1,22 @@
+class Solution{
+public:
+    void check(Node *root,int l,int h,int&c)
+    {
+        
+        if(root==NULL)return ;
+        if(root->data >=l && root->data<=h)
+        c++;
+        check(root->left,l,h,c);
+        check(root->right,l,h,c);
+        
+    }
+    int getCount(Node *root, int l, int h)
+    {
+      // your code goes here   
+      if(root==NULL)return 0;
+      int c=0;
+      
+      check(root,l,h,c);
+      return c;
+    }
+};
